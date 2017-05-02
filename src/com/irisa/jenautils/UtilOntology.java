@@ -102,20 +102,20 @@ public class UtilOntology {
 		this._ontologyClassVocabulary.add(OWL2.Thing);
 		this._ontologyClassVocabulary.add(OWL2.TransitiveProperty);
 		
-		this._ontologyPropertyVocabulary.add(RDF.first);
+//		this._ontologyPropertyVocabulary.add(RDF.first);
 		this._ontologyPropertyVocabulary.add(RDF.object);
 		this._ontologyPropertyVocabulary.add(RDF.predicate);
-		this._ontologyPropertyVocabulary.add(RDF.rest);
+//		this._ontologyPropertyVocabulary.add(RDF.rest);
 		this._ontologyPropertyVocabulary.add(RDF.subject);
 		this._ontologyPropertyVocabulary.add(RDF.type);
-		this._ontologyPropertyVocabulary.add(RDF.value);
-		this._ontologyPropertyVocabulary.add(RDFS.comment);
+//		this._ontologyPropertyVocabulary.add(RDF.value);
+//		this._ontologyPropertyVocabulary.add(RDFS.comment);
 		this._ontologyPropertyVocabulary.add(RDFS.domain);
 		this._ontologyPropertyVocabulary.add(RDFS.isDefinedBy);
 //		this._ontologyPropertyVocabulary.add(RDFS.label);
-		this._ontologyPropertyVocabulary.add(RDFS.member);
+//		this._ontologyPropertyVocabulary.add(RDFS.member);
 		this._ontologyPropertyVocabulary.add(RDFS.range);
-		this._ontologyPropertyVocabulary.add(RDFS.seeAlso);
+//		this._ontologyPropertyVocabulary.add(RDFS.seeAlso);
 		this._ontologyPropertyVocabulary.add(RDFS.subClassOf);
 		this._ontologyPropertyVocabulary.add(RDFS.subPropertyOf);
 		this._ontologyPropertyVocabulary.add(OWL.allValuesFrom);
@@ -161,7 +161,7 @@ public class UtilOntology {
 		this._ontologyPropertyVocabulary.add(OWL2.equivalentProperty);
 		this._ontologyPropertyVocabulary.add(OWL2.hasKey);
 		this._ontologyPropertyVocabulary.add(OWL2.hasSelf);
-		this._ontologyPropertyVocabulary.add(OWL2.hasValue);
+//		this._ontologyPropertyVocabulary.add(OWL2.hasValue);
 		this._ontologyPropertyVocabulary.add(OWL2.imports);
 		this._ontologyPropertyVocabulary.add(OWL2.incompatibleWith);
 		this._ontologyPropertyVocabulary.add(OWL2.intersectionOf);
@@ -181,7 +181,7 @@ public class UtilOntology {
 		this._ontologyPropertyVocabulary.add(OWL2.propertyChainAxiom);
 		this._ontologyPropertyVocabulary.add(OWL2.propertyDisjointWith);
 		this._ontologyPropertyVocabulary.add(OWL2.qualifiedCardinality);
-		this._ontologyPropertyVocabulary.add(OWL2.sameAs);
+//		this._ontologyPropertyVocabulary.add(OWL2.sameAs);
 		this._ontologyPropertyVocabulary.add(OWL2.someValuesFrom);
 		this._ontologyPropertyVocabulary.add(OWL2.sourceIndividual);
 		this._ontologyPropertyVocabulary.add(OWL2.targetIndividual);
@@ -189,8 +189,8 @@ public class UtilOntology {
 		this._ontologyPropertyVocabulary.add(OWL2.topDataProperty);
 		this._ontologyPropertyVocabulary.add(OWL2.topObjectProperty);
 		this._ontologyPropertyVocabulary.add(OWL2.unionOf);
-		this._ontologyPropertyVocabulary.add(OWL2.versionInfo);
-		this._ontologyPropertyVocabulary.add(OWL2.versionIRI);
+//		this._ontologyPropertyVocabulary.add(OWL2.versionInfo);
+//		this._ontologyPropertyVocabulary.add(OWL2.versionIRI);
 		this._ontologyPropertyVocabulary.add(OWL2.withRestrictions);
 		
 	}
