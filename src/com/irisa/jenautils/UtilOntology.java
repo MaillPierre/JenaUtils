@@ -313,6 +313,10 @@ public class UtilOntology {
 		return this._classes.containsKey(r);
 	}
 	
+	public boolean isClass(String uri) {
+		return isClass(this._ontoModel.createResource(uri));
+	}
+	
 	public boolean isSubclassOf(Resource r1, Resource r2)
 	{
 		return getSuperclass(r1).contains(r2);
@@ -326,6 +330,10 @@ public class UtilOntology {
 	public boolean isProperty(Resource r)
 	{
 		return this._properties.containsKey(r);
+	}
+	
+	public boolean isProperty(String uri) {
+		return isProperty(this._ontoModel.createResource(uri));
 	}
 	
 	public void addProperty(Resource r)
@@ -481,13 +489,13 @@ public class UtilOntology {
 		this._ontoModel.add(s, p, o);
 	}
 	
-	private void initClasses(BaseRDF tbase) {
+	private void initClasses(QueryIteratorFurnisher furnisher) {
 		logger.trace("Init classes");
 		// Classes utilisées comme types
 		String typeClassSelectString = "SELECT DISTINCT ?c WHERE { ?i a ?c . }";
 		Query typeClassSelect = QueryFactory.create(typeClassSelectString);
 //		QueryExecution typeClassSelectExec = tbase.executionQuery(typeClassSelect);
-		QueryResultIterator classTypeResult = new QueryResultIterator(typeClassSelect, tbase);
+		QueryResultIterator classTypeResult = furnisher.retrieve(typeClassSelect); //new QueryResultIterator(typeClassSelect, tbase);
 		try 
 		{
 			while(classTypeResult.hasNext())
@@ -513,7 +521,7 @@ public class UtilOntology {
 		String classRDFSSelectString = "SELECT DISTINCT ?c WHERE { ?c a <" + RDFS.Class + "> . }";
 		Query classRDFSSelect = QueryFactory.create(classRDFSSelectString);
 //		QueryExecution classRDFSSelectExec = tbase.executionQuery(classRDFSSelect);
-		QueryResultIterator classRDFSResult = new QueryResultIterator(classRDFSSelect, tbase);
+		QueryResultIterator classRDFSResult = furnisher.retrieve(classRDFSSelect); //new QueryResultIterator(classRDFSSelect, tbase);
 		try 
 		{
 			while(classRDFSResult.hasNext())
@@ -540,7 +548,7 @@ public class UtilOntology {
 		String classOWLSelectString = "SELECT DISTINCT ?c WHERE { ?c a <" + OWL.Class + "> . }";
 		Query classOWLSelect = QueryFactory.create(classOWLSelectString);
 //		QueryExecution classOWLSelectExec = tbase.executionQuery(classOWLSelect);
-		QueryResultIterator classOWLResult = new QueryResultIterator( classOWLSelect, tbase);
+		QueryResultIterator classOWLResult = furnisher.retrieve( classOWLSelect);//new QueryResultIterator( classOWLSelect, tbase);
 		try 
 		{
 			while(classOWLResult.hasNext())
@@ -567,7 +575,7 @@ public class UtilOntology {
 		String subClassOfSelectString = "SELECT DISTINCT ?c1 ?c2 WHERE { ?c1 <" + RDFS.subClassOf + "> ?c2 . }";
 		Query subclassOfSelect = QueryFactory.create(subClassOfSelectString);
 //		QueryExecution subclassOfExec = tbase.executionQuery(subclassOfSelect);
-		QueryResultIterator subclassOfResult = new QueryResultIterator(subclassOfSelect, tbase);
+		QueryResultIterator subclassOfResult = furnisher.retrieve(subclassOfSelect);//new QueryResultIterator(subclassOfSelect, tbase);
 		try 
 		{
 			while(subclassOfResult.hasNext())
@@ -595,14 +603,14 @@ public class UtilOntology {
 
 	}
 	
-	private void initProperties(BaseRDF tbase) {
+	private void initProperties(QueryIteratorFurnisher furnisher) {
 		
 		logger.trace("init Onto: rdfs subproperties");
 		// Propriétés utilisées avec subPropertyOf
 		String subpropertyOfSelectString = "SELECT DISTINCT ?p1 ?p2 WHERE { ?p1 <" + RDFS.subPropertyOf + "> ?p2 . }";
 		Query subpropertyOfSelect = QueryFactory.create(subpropertyOfSelectString);
 //		QueryExecution subpropertyOfExec = tbase.executionQuery(subpropertyOfSelect);
-		QueryResultIterator subpropertyOfResult = new QueryResultIterator(subpropertyOfSelect, tbase);
+		QueryResultIterator subpropertyOfResult = furnisher.retrieve(subpropertyOfSelect);//new QueryResultIterator(subpropertyOfSelect, tbase);
 		try 
 		{
 			while(subpropertyOfResult.hasNext())
@@ -627,7 +635,7 @@ public class UtilOntology {
 		String propertyRDFSSelectString = "SELECT DISTINCT ?p WHERE { ?p a <" + RDF.Property + "> . }";
 		Query propertyRDFSSelect = QueryFactory.create(propertyRDFSSelectString);
 //		QueryExecution propertyRDFSSelectExec = tbase.executionQuery(propertyRDFSSelect);
-		QueryResultIterator propertyRDFSResult = new QueryResultIterator(propertyRDFSSelect, tbase);
+		QueryResultIterator propertyRDFSResult = furnisher.retrieve(propertyRDFSSelect); //new QueryResultIterator(propertyRDFSSelect, tbase);
 		try 
 		{
 			while(propertyRDFSResult.hasNext())
@@ -652,7 +660,7 @@ public class UtilOntology {
 		String datatypePropertyOWLSelectString = "SELECT DISTINCT ?p WHERE { ?p a <" + OWL.DatatypeProperty + "> . }";
 		Query datatypePropertyOWLSelect = QueryFactory.create(datatypePropertyOWLSelectString);
 //		QueryExecution datatypePropertyOWLSelectExec = tbase.executionQuery(datatypePropertyOWLSelect);
-		QueryResultIterator datatypePropertyOWLResult = new QueryResultIterator(datatypePropertyOWLSelect, tbase);
+		QueryResultIterator datatypePropertyOWLResult = furnisher.retrieve(datatypePropertyOWLSelect);//new QueryResultIterator(datatypePropertyOWLSelect, tbase);
 		try 
 		{
 			while(datatypePropertyOWLResult.hasNext())
@@ -677,7 +685,7 @@ public class UtilOntology {
 		String objectPropertyOWLSelectString = "SELECT DISTINCT ?p WHERE { ?p a <" + OWL.ObjectProperty + "> . }";
 		Query objectPropertyOWLSelect = QueryFactory.create(objectPropertyOWLSelectString);
 //		QueryExecution objectPropertyOWLSelectExec = tbase.executionQuery(objectPropertyOWLSelect);
-		QueryResultIterator objectPropertyOWLResult = new QueryResultIterator(objectPropertyOWLSelect, tbase);
+		QueryResultIterator objectPropertyOWLResult = furnisher.retrieve(objectPropertyOWLSelect);// new QueryResultIterator(objectPropertyOWLSelect, tbase);
 		try 
 		{
 			while(objectPropertyOWLResult.hasNext())
@@ -702,7 +710,7 @@ public class UtilOntology {
 		String transitivePropertyOWLSelectString = "SELECT DISTINCT ?p WHERE { ?p a <" + OWL.TransitiveProperty + "> . }";
 		Query transitivePropertyOWLSelect = QueryFactory.create(transitivePropertyOWLSelectString);
 //		QueryExecution transitivePropertyOWLSelectExec = tbase.executionQuery(transitivePropertyOWLSelect);
-		QueryResultIterator transitivePropertyOWLResult = new QueryResultIterator(transitivePropertyOWLSelect, tbase);
+		QueryResultIterator transitivePropertyOWLResult = furnisher.retrieve(transitivePropertyOWLSelect); // new QueryResultIterator(transitivePropertyOWLSelect, tbase);
 		try 
 		{
 			while(transitivePropertyOWLResult.hasNext())
@@ -727,7 +735,7 @@ public class UtilOntology {
 		String symmetricPropertyOWLSelectString = "SELECT DISTINCT ?p WHERE { ?p a <" + OWL.SymmetricProperty + "> . }";
 		Query symmetricPropertyOWLSelect = QueryFactory.create(symmetricPropertyOWLSelectString);
 //		QueryExecution symmetricPropertyOWLSelectExec = tbase.executionQuery(symmetricPropertyOWLSelect);
-		QueryResultIterator symmetricPropertyOWLResult = new QueryResultIterator(symmetricPropertyOWLSelect, tbase);
+		QueryResultIterator symmetricPropertyOWLResult = furnisher.retrieve(symmetricPropertyOWLSelect); //new QueryResultIterator(symmetricPropertyOWLSelect, tbase);
 		try 
 		{
 			while(symmetricPropertyOWLResult.hasNext())
@@ -752,7 +760,7 @@ public class UtilOntology {
 		String functionalPropertyOWLSelectString = "SELECT DISTINCT ?p WHERE { ?p a <" + OWL.FunctionalProperty + "> . }";
 		Query functionalPropertyOWLSelect = QueryFactory.create(functionalPropertyOWLSelectString);
 //		QueryExecution functionalPropertyOWLSelectExec = tbase.executionQuery(functionalPropertyOWLSelect);
-		QueryResultIterator functionalPropertyOWLResult = new QueryResultIterator(functionalPropertyOWLSelect, tbase);
+		QueryResultIterator functionalPropertyOWLResult = furnisher.retrieve(functionalPropertyOWLSelect) ; // new QueryResultIterator(functionalPropertyOWLSelect, tbase);
 		try 
 		{
 			while(functionalPropertyOWLResult.hasNext())
@@ -797,15 +805,38 @@ public class UtilOntology {
 //		}
 		
 	}
+	
+	public int numberOfClasses() {
+		return this.classes().size();
+	}
+	
+	public int numberOfProperties() {
+		return this.properties().size();
+	}
 
 	public void init(BaseRDF tbase)
 	{
 		logger.trace("INIT ONTO");
 		
-		initClasses(tbase);
+		QueryIteratorFurnisher newFurnisher = new QueryIteratorFurnisher() {
+			@Override
+			public QueryResultIterator retrieve(Query query) {
+				return new QueryResultIterator(query, tbase);
+			}
+		};
+		
+		init(newFurnisher);
 
-		initProperties(tbase);
+		logger.trace("FIN INITONTO");
+	}
+	
+	public void init(QueryIteratorFurnisher furnisher) {
+		logger.trace("INIT ONTO");
+		
+		initClasses(furnisher);
 
+		initProperties(furnisher);
+		
 		logger.trace("FIN INITONTO");
 	}
 

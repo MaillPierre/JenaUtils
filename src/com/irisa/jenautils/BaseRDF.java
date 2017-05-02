@@ -82,6 +82,13 @@ public class BaseRDF {
 		this(adresse, MODE.LOCAL);
 	}
 	
+	/**
+	 * Par défaut, mode local, model vide
+	 */
+	public BaseRDF() {
+		this(null, MODE.LOCAL);
+	}
+	
 	public long size()
 	{
 		if(this._mode == MODE.DISTANT)
@@ -106,6 +113,16 @@ public class BaseRDF {
 			this._model = ModelFactory.createDefaultModel();
 		}
 		this._mode = MODE.LOCAL;
+	}
+	
+	public void setLocalMode(Model model)
+	{
+		if(this._model != null)
+		{
+			this._model.close();
+		}
+		this._mode = MODE.LOCAL;
+		this._model = model;
 	}
 	
 	public void setDistantMode(String server)
