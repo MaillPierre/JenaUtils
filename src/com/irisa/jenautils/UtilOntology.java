@@ -112,7 +112,7 @@ public class UtilOntology {
 		this._ontologyPropertyVocabulary.add(RDFS.comment);
 		this._ontologyPropertyVocabulary.add(RDFS.domain);
 		this._ontologyPropertyVocabulary.add(RDFS.isDefinedBy);
-		this._ontologyPropertyVocabulary.add(RDFS.label);
+//		this._ontologyPropertyVocabulary.add(RDFS.label);
 		this._ontologyPropertyVocabulary.add(RDFS.member);
 		this._ontologyPropertyVocabulary.add(RDFS.range);
 		this._ontologyPropertyVocabulary.add(RDFS.seeAlso);
