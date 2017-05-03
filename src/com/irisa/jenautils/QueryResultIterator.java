@@ -300,6 +300,7 @@ public class QueryResultIterator implements Iterator<CustomQuerySolution> {
 		String query = "SELECT DISTINCT ?s ?p ?o WHERE { ?s ?p ?o }";
 		BaseRDF base = new BaseRDF("http://dbpedia.org/sparql", MODE.DISTANT);
 		QueryResultIterator it = new QueryResultIterator(query, base);
+		try {
 		LinkedList<HashSet<RDFNode>> results = new LinkedList<HashSet<RDFNode>>();
 		while(it.hasNext()) {
 			CustomQuerySolution sol = it.next();
@@ -319,6 +320,9 @@ public class QueryResultIterator implements Iterator<CustomQuerySolution> {
 				break;
 			}
 			results.add(resultLine);
+		}
+		} finally {
+			it.close();
 		}
 	}
 
