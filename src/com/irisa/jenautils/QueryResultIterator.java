@@ -194,9 +194,28 @@ public class QueryResultIterator implements Iterator<CustomQuerySolution> {
 
 	@Override
 	public boolean hasNext() {
-		return _result.hasNext();
+		try {
+			return _result.hasNext();
+		} catch (Exception e) {
+			if(this._nbTries < this._nbTriesMax) {
+				this._nbTries++;
+				try {
+					Thread.sleep(_errorWaitingTime);
+				} catch (InterruptedException e1) {
+					logger.error("Can't sleep", e1);
+				}
+				return hasNext();
+				
+			} else {
+				throw e; 
+			}
+		}
 	}
 
+	public QueryExecution getExecution() {
+		return this._exec;
+	}
+	
 	@Override
 	public CustomQuerySolution next() {
 		return this.nextAnswerSet();
