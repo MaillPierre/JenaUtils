@@ -92,12 +92,8 @@ public class QueryResultIterator implements Iterator<CustomQuerySolution> {
 			{
 				logger.fatal(((QueryExceptionHTTP) e).getResponseCode());
 				logger.fatal(((QueryExceptionHTTP) e).getMessage());
-				throw e;
+//				throw e;
 			} 
-			else 
-			{
-				logger.fatal(e.getClass());
-			}
 			while(this._result == null && this._nbTries < _nbTriesMax) {
 				try 
 				{
@@ -277,23 +273,20 @@ public class QueryResultIterator implements Iterator<CustomQuerySolution> {
 			{
 				logger.fatal(((QueryExceptionHTTP) e).getResponseCode());
 				logger.fatal(((QueryExceptionHTTP) e).getMessage());
-				throw e;
+//				throw e;
 			} 
-			else 
-			{
-				logger.fatal(e.getClass());
-			}
 			try 
 			{
 				if(this._nbTries < this._nbTriesMax) {
 					Thread.sleep(_errorWaitingTime);
 					this._offset -= this._limit;
 					this._nbTries++;
+					_resultCount--;
 				}
 			} 
 			catch (InterruptedException e1) 
 			{
-				e1.printStackTrace();
+				logger.error(e1);
 			}
 		}
 		//		logger.debug("Row n°" + this.getRowNumber() + " QUERY:" + this.getQuery().toString().replace("\n", ""));
