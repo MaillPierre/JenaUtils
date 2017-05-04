@@ -12,6 +12,11 @@ import org.apache.jena.rdf.model.Resource;
  */
 public class CustomQuerySolution extends java.util.HashMap<String, RDFNode> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5442810975647460560L;
+
 	public Iterator<String> varNames() {
 		return this.keySet().iterator();
 	}

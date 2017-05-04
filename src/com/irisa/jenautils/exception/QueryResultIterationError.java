@@ -1,5 +1,6 @@
 package com.irisa.jenautils.exception;
 
+@SuppressWarnings("serial")
 public class QueryResultIterationError extends Exception {
 
 	public QueryResultIterationError() {

@@ -46,7 +46,6 @@ public class QueryResultIterator implements Iterator<CustomQuerySolution> {
 	private int _nbTriesMax;
 	private int _nbTries = 0;
 	private boolean _hasLimit = false;
-	private boolean _isBaseRDF = false;
 
 	private static Logger logger = Logger.getLogger(QueryResultIterator.class);
 
