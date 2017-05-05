@@ -40,7 +40,7 @@ public class QueryResultIterator implements Iterator<CustomQuerySolution> {
 	private int _resultCount;
 	private int _errorWaitingTime;
 	private static int _defaultNbTriesMax = 5;
-	private static int _defaultLimit = 10;
+	private static int _defaultLimit = 1000;
 	private static int _defaultErrorWaitingTime = 15000;
 	private static String _defaultDefaultGraph = null;
 	private int _nbTriesMax;
@@ -334,6 +334,7 @@ public class QueryResultIterator implements Iterator<CustomQuerySolution> {
 		}
 		} finally {
 			it.close();
+			base.close();
 		}
 	}
 

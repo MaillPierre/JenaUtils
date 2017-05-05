@@ -2,6 +2,7 @@ package com.irisa.jenautils;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 //import org.apache.jena.atlas.web.auth.ServiceAuthenticator;
@@ -37,15 +38,8 @@ public class BaseRDF {
 		LOCAL, DISTANT;
 	}
 	
-	public BaseRDF(String adresse, MODE mode)
-	{
-		this(adresse, null, mode);
-	}
-	
-	public BaseRDF(String adresse, String opt, MODE mode)
-	{
+	public BaseRDF(String adresse, MODE mode) {
 		this._mode = mode;
-//		this._auth = new ServiceAuthenticator();
 		if(mode == MODE.DISTANT)
 		{
 			this._server = adresse;
@@ -60,16 +54,17 @@ public class BaseRDF {
 				try {
 					FileInputStream fileStr = new FileInputStream(adresse);
 					this._model.read(fileStr, null, Utils.guessLangFromFilename(adresse) );
-				} catch (FileNotFoundException e) {
+					fileStr.close();
+				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
 		}
 	}
 	
-	public BaseRDF(String adresse)
+	public BaseRDF(String filename)
 	{
-		this(adresse, MODE.LOCAL);
+		this(filename, MODE.LOCAL);
 	}
 	
 	/**
@@ -152,6 +147,12 @@ public class BaseRDF {
 		result.setTimeout(30000, TimeUnit.MILLISECONDS);
 		logger.trace("FIN executeQuery(Query query)");
 		return result;
+	}
+	
+	public void close() {
+		if(this._model != null) {
+			this._model.close();
+		}
 	}
 	
 	public String toString() {
