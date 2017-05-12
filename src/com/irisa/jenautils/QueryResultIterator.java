@@ -24,7 +24,7 @@ import com.irisa.jenautils.BaseRDF.MODE;
 
 /**
  * An iterator built over a query execution that will move over the results using LIMIT / OFFSET to avoid asking for to much results at the same time.
- * In case of an exception, it will try again a limited number of times, after having waited for a set time
+ * In case of an exception, it will try again a limited number of times, after having waited for a set amount of time
  * @author pmaillot
  *
  */

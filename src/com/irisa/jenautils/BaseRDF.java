@@ -15,6 +15,7 @@ import org.apache.jena.query.QueryParseException;
 import org.apache.jena.query.Syntax;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.riot.RiotParseException;
 
 /**
  * Classe utilistaire pour la connection à un serveur.
@@ -56,6 +57,8 @@ public class BaseRDF {
 					fileStr.close();
 				} catch (IOException e) {
 					e.printStackTrace();
+				} catch (RiotParseException e) {
+					
 				}
 			}
 		}

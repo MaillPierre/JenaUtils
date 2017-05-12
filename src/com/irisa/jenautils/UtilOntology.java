@@ -839,4 +839,8 @@ public class UtilOntology {
 		logger.trace("FIN INITONTO");
 	}
 
+	public void close() {
+		this._ontoModel.close();
+	}
+
 }
