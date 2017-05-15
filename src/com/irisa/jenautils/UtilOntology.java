@@ -30,6 +30,7 @@ public class UtilOntology {
 	private HashMap<Resource, Couple<HashSet<Resource>, HashSet<Resource>>> _properties;
 	private HashSet<Resource> _ontologyClassVocabulary;
 	private HashSet<Property> _ontologyPropertyVocabulary;
+	private HashSet<Resource> _usedClasses; // Listes des classes avec une instanciation
 	
 	private Model _ontoModel;
 	
@@ -302,9 +303,19 @@ public class UtilOntology {
 		return this._classes.keySet().iterator();
 	}
 	
+	public Iterator<Resource> usedClassIterator()
+	{
+		return this._usedClasses.iterator();
+	}
+	
 	public HashSet<Resource> classes()
 	{
 		return new HashSet<Resource>(this._classes.keySet());
+	}
+	
+	public HashSet<Resource> usedClasses()
+	{
+		return this._usedClasses;
 	}
 	
 	public boolean isClass(Resource r)
@@ -506,6 +517,7 @@ public class UtilOntology {
 				{
 					if(respectPattern(nClass)) {
 						this.addClass(nClass);
+						this._usedClasses.add(nClass);
 					}
 				} 
 			}
