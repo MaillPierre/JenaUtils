@@ -45,6 +45,7 @@ public class UtilOntology {
 		this._ontoModel = ModelFactory.createDefaultModel();
 		this._ontologyClassVocabulary = new HashSet<Resource>();
 		this._ontologyPropertyVocabulary = new HashSet<Property>();
+		this._usedClasses = new HashSet<Resource>();
 
 		this._ontologyClassVocabulary.add(RDF.Alt);
 		this._ontologyClassVocabulary.add(RDF.Bag);
