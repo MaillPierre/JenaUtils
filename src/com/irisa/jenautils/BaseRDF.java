@@ -16,6 +16,7 @@ import org.apache.jena.query.Syntax;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.riot.RiotParseException;
+import org.apache.jena.util.FileManager;
 
 /**
  * Classe utilistaire pour la connection à un serveur.
@@ -54,11 +55,10 @@ public class BaseRDF {
 				try {
 					FileInputStream fileStr = new FileInputStream(adresse);
 					this._model.read(fileStr, null, Utils.guessLangFromFilename(adresse) );
-					fileStr.close();
 				} catch (IOException e) {
 					e.printStackTrace();
 				} catch (RiotParseException e) {
-					
+				logger.error("", e);
 				}
 			}
 		}
