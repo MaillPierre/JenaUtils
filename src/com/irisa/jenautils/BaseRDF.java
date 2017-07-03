@@ -19,9 +19,7 @@ import org.apache.jena.riot.RiotParseException;
 import org.apache.jena.util.FileManager;
 
 /**
- * Classe utilistaire pour la connection à un serveur.
- * La classe en configurable pour un acces distant via http ou local par le chargement d'un fichier dans Jena
- * elle permet également de disposer de fonctions pour le voisinage, le nombre d'occurence et autres fonctions utilitaires pour les requêtes
+ * Utility classe to handle the connetion and QueryExecution generation transparently for either a remote base or a local one.
  * @author maillot
  *
  */
@@ -36,12 +34,12 @@ public class BaseRDF {
 	
 	public enum MODE 
 	{
-		LOCAL, DISTANT;
+		LOCAL, REMOTE;
 	}
 	
 	public BaseRDF(String adresse, MODE mode) {
 		this._mode = mode;
-		if(mode == MODE.DISTANT)
+		if(mode == MODE.REMOTE)
 		{
 			this._server = adresse;
 			this._model = null;
@@ -78,7 +76,7 @@ public class BaseRDF {
 	
 	public long size()
 	{
-		if(this._mode == MODE.DISTANT)
+		if(this._mode == MODE.REMOTE)
 		{
 			return -1;
 		}
@@ -115,7 +113,7 @@ public class BaseRDF {
 	public void setDistantMode(String server)
 	{
 		this._server = server;
-		this._mode = MODE.DISTANT;
+		this._mode = MODE.REMOTE;
 	}
 	
 	public QueryExecution executionQuery(String query)
@@ -131,7 +129,7 @@ public class BaseRDF {
 		
 		try
 		{
-			if(_mode == MODE.DISTANT) 
+			if(_mode == MODE.REMOTE) 
 			{
 				result = QueryExecutionFactory.sparqlService(_server, query/*, this._auth*/);
 			}

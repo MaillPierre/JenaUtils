@@ -309,7 +309,7 @@ public class QueryResultIterator implements Iterator<CustomQuerySolution> {
 		BasicConfigurator.configure();
 		PropertyConfigurator.configure("log4j-config.txt");
 		String query = "SELECT DISTINCT ?s ?p ?o WHERE { ?s ?p ?o }";
-		BaseRDF base = new BaseRDF("http://dbpedia.org/sparql", MODE.DISTANT);
+		BaseRDF base = new BaseRDF("http://dbpedia.org/sparql", MODE.REMOTE);
 		QueryResultIterator it = new QueryResultIterator(query, base);
 		try {
 		LinkedList<HashSet<RDFNode>> results = new LinkedList<HashSet<RDFNode>>();

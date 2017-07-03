@@ -1,5 +1,12 @@
 package com.irisa.jenautils;
 
+/**
+ * Nothing to see here ...
+ * @author pmaillot
+ *
+ * @param <A>
+ * @param <B>
+ */
 public class Couple<A, B> {
 	private A _first;
 	private B _second;

@@ -17,6 +17,7 @@ import org.apache.jena.util.FileUtils;
 
 public class Utils {
 
+	@Deprecated
 	public static Model purgeIncorrectURI(Model m) {
 		StmtIterator itStat = m.listStatements();
 		ArrayList<Statement> toRemove = new ArrayList<Statement>();
@@ -34,7 +35,8 @@ public class Utils {
 		m.remove(toRemove);
 		return m;
 	}
-	
+
+	@Deprecated
 	public static String guessLangFromFilename(String filename) {
 		String result = null;
 		
@@ -81,19 +83,14 @@ public class Utils {
 		return result;
 	}
 	
-	/**
-	 * 
-	 * @param s1
-	 * @param s2
-	 * @return Retourne ce qui est dans s1 mais pas dans s2
-	 */
 	public static <T> HashSet<T> notIn(HashSet<T> s1, HashSet<T> s2)
 	{
 		HashSet<T> result = new HashSet<T>(s1);
 		result.removeAll(intersection(s1, s2));
 		return result;
 	}
-	
+
+	@Deprecated
 	public static HashSet<Property> getProperties(HashSet<Statement> s)
 	{
 		HashSet<Property> result = new HashSet<Property>();
@@ -105,7 +102,8 @@ public class Utils {
 		
 		return result;
 	}
-	
+
+	@Deprecated
 	public static HashSet<RDFNode> getUris(HashSet<Statement> s)
 	{
 		HashSet<RDFNode> result = new HashSet<RDFNode>();
@@ -125,7 +123,8 @@ public class Utils {
 		
 		return result;
 	}
-	
+
+	@Deprecated
 	public static String tripleToQueryString(Triple t)
 	{
 		String result = "";
@@ -167,6 +166,7 @@ public class Utils {
 		return result;
 	}
 
+	@Deprecated
 	public static String tripleToQueryString(ElementPathBlock block)
 	{
 		String result = "";
@@ -180,6 +180,7 @@ public class Utils {
 		return result;
 	}
 
+	@Deprecated
 	public static String tripleToQueryString(TriplePath t)
 	{
 		return tripleToQueryString(t.asTriple());
@@ -189,7 +190,8 @@ public class Utils {
 	{
 		return nodeToN3String(t.getSubject()) + " " + nodeToN3String(t.getPredicate()) + " " + nodeToN3String(t.getObject()) + " .";
 	}
-	
+
+	@Deprecated
 	public static String statementSetToString(Set<Statement> s)
 	{
 		String result = "";
@@ -203,7 +205,8 @@ public class Utils {
 		
 		return result;
 	}
-	
+
+	@Deprecated
 	public static String nodeToN3String(RDFNode r)
 	{
 		String result = "";

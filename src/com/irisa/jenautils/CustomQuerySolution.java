@@ -6,7 +6,7 @@ import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.Resource;
 
 /**
- * Simple surcharge of a HashMap for query result handling
+ * Simple overload of HashMap to handle QueryResultIterator results
  * @author pmaillot
  *
  */
