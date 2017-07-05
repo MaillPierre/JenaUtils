@@ -37,6 +37,11 @@ public class BaseRDF {
 		LOCAL, REMOTE;
 	}
 	
+	public BaseRDF(Model model) {
+		this._model = model;
+		this._mode = MODE.LOCAL;
+	}
+	
 	public BaseRDF(String adresse, MODE mode) {
 		this._mode = mode;
 		if(mode == MODE.REMOTE)
@@ -53,10 +58,8 @@ public class BaseRDF {
 				try {
 					FileInputStream fileStr = new FileInputStream(adresse);
 					this._model.read(fileStr, null, Utils.guessLangFromFilename(adresse) );
-				} catch (IOException e) {
-					e.printStackTrace();
-				} catch (RiotParseException e) {
-				logger.error("", e);
+				} catch (IOException |RiotParseException e) {
+					logger.error(e);
 				}
 			}
 		}

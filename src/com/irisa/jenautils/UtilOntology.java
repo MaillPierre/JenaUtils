@@ -196,6 +196,15 @@ public class UtilOntology {
 		
 	}
 	
+	public UtilOntology(BaseRDF base) {
+		this();
+		init(base);
+	}
+	
+	public UtilOntology(Model model) {
+		this(new BaseRDF(model));
+	}
+	
 	public static void setClassRegex(String regex) {
 		classRegex = regex;
 	}
