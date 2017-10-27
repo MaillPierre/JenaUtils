@@ -45,7 +45,7 @@ public class Couple<A, B> {
 	
 	public int hashCode()
 	{
-		return this._first.toString().hashCode() + this._second.toString().hashCode();
+		return this.toString().hashCode();
 	}
 	
 	/**

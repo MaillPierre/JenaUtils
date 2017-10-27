@@ -56,7 +56,7 @@ public class Utils {
 		return result;
 	}
 	
-	public static <T> HashSet<T> intersection(HashSet<T> s1, HashSet<T> s2)
+	public static <T> Set<T> intersection(Set<T> s1, Set<T> s2)
 	{
 		HashSet<T> result = new HashSet<T>();
 		for(T n : s1)
@@ -69,21 +69,21 @@ public class Utils {
 		return result;
 	}
 	
-	public static <T> HashSet<T> union(HashSet<T> s1, HashSet<T> s2)
+	public static <T> Set<T> union(Set<T> s1, Set<T> s2)
 	{
 		HashSet<T> result = new HashSet<T>(s1);
 		result.addAll(s2);
 		return result;
 	}
 	
-	public static <T> HashSet<T> difference(HashSet<T> s1, HashSet<T> s2)
+	public static <T> Set<T> difference(Set<T> s1, Set<T> s2)
 	{
-		HashSet<T> result = union(s1, s2);
+		Set<T> result = union(s1, s2);
 		result.removeAll(intersection(s1, s2));
 		return result;
 	}
 	
-	public static <T> HashSet<T> notIn(HashSet<T> s1, HashSet<T> s2)
+	public static <T> Set<T> notIn(Set<T> s1, Set<T> s2)
 	{
 		HashSet<T> result = new HashSet<T>(s1);
 		result.removeAll(intersection(s1, s2));
