@@ -7,6 +7,9 @@ import java.util.LinkedList;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+
+import com.irisa.jenautils.BaseRDF.MODE;
+
 import org.apache.jena.query.Query;
 import org.apache.jena.query.QueryFactory;
 import org.apache.jena.rdf.model.Model;
@@ -205,6 +208,10 @@ public class UtilOntology {
 		this(new BaseRDF(model));
 	}
 	
+	public UtilOntology(String filename) {
+		this(new BaseRDF(filename, MODE.LOCAL));
+	}
+	
 	public static void setClassRegex(String regex) {
 		classRegex = regex;
 	}
@@ -228,6 +235,26 @@ public class UtilOntology {
 		if(!this._classes.containsKey(r) && r != null && this.respectPattern(r))
 		{
 			this._classes.put(r, new Couple<HashSet<Resource>, HashSet<Resource>>(new HashSet<Resource>(), new HashSet<Resource>()));
+		}
+	}
+	
+	/**
+	 * Automatically add the information of the triple to the right index
+	 * @param res1
+	 * @param prop
+	 * @param res2
+	 */
+	public void addOntologyTriple(Resource res1, Property prop, Resource res2) {
+		if(prop.equals(RDF.type)) {
+			if( res2.equals(RDF.Property)) {
+				this.addProperty(res1);
+			} else if(res2.equals(RDFS.Class)) {
+				this.addClass(res1);
+			}
+		} else if(prop.equals(RDFS.subClassOf)) {
+			this.addIsSubclassOf(res1, res2);
+		} else if(prop.equals(RDFS.subPropertyOf)) {
+			this.addIsSubproperty(res1, res2);
 		}
 	}
 	
