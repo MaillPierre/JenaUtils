@@ -246,7 +246,13 @@ public class UtilOntology {
 	 */
 	public void addOntologyTriple(Resource res1, Property prop, Resource res2) {
 		if(prop.equals(RDF.type)) {
-			if( res2.equals(RDF.Property)) {
+			if( res2.equals(RDF.Property) 
+					|| res2.equals(OWL.DatatypeProperty) 
+					|| res2.equals(OWL.ObjectProperty) 
+					|| res2.equals(OWL.FunctionalProperty)
+					|| res2.equals(OWL.InverseFunctionalProperty)
+					|| res2.equals(OWL.SymmetricProperty)
+					|| res2.equals(OWL.TransitiveProperty)) {
 				this.addProperty(res1);
 			} else if(res2.equals(RDFS.Class)) {
 				this.addClass(res1);
